@@ -1,0 +1,103 @@
+/* static/myapp/css/styles.css */
+.container {
+    padding: 20px; /* Внутренние отступы со всех сторон */
+    margin: 0 auto; /* Автоматический внешний отступ по горизонтали для центрирования */
+}
+
+.page_header {
+    text-align: center; /* Центрирование текста */
+    font-family: 'BioRhyme', serif; /* Установка шрифта */
+    font-size: 48px; /* Размер шрифта */
+    color: black; /* Цвет текста */
+    margin-top: 20px; /* Отступ сверху */
+    margin-bottom: 20px; /* Отступ снизу */
+    background-color: rgb(204, 204, 0, 0.3)
+}
+
+body {
+    font-family: 'BioRhyme', serif;
+    line-height: 1.6;
+    background-color: rgb(255, 247, 0, 0.3);
+}
+
+.input-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px; /* Внутренние отступы */
+    margin: 20px 10%; /* Отступы сверху и снизу, 10% по бокам */
+}
+
+input[type="text"] {
+    flex: 11; /* 60% ширины */
+    height: 40px; /* Высота кнопки */
+    font-size: 16px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+button[type="submit"] {
+    flex: 1; /* 20% ширины */
+    height: 40px; /* Высота кнопки */
+    font-size: 16px;
+    cursor: pointer;
+    display: flex; /* Устанавливаем flex-контейнер */
+    align-items: center; /* Центрируем по вертикали */
+    justify-content: center; /* Центрируем по горизонтали */
+}
+
+
+/* Пример стилизации для кнопок */
+button {
+    font-family: 'BioRhyme', serif;
+    background-color: rgba(255, 215, 0, 0.7);
+    color: black;
+    border: 2px solid #FF4500;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 0;
+}
+
+button:hover {
+    background-color: #FFD700;
+    color: black;
+}
+
+#text-content {
+    visibility: hidden; /* Изначально скрыто */
+    margin-top: 20px;
+}
+
+#text-content p {
+    font-size: 18px;
+    color: black; /* Цвет текста */
+    margin: 0;
+}
+
+.city-info {
+    display: flex; /* Использование Flexbox */
+    align-items: center; /* Вертикальное выравнивание по центру */
+    justify-content: center; /* Центрирование элементов внутри контейнера */
+    background-color: rgba(255, 215, 0, 0.5); /* Полупрозрачный желтый фон */
+    border: 2px solid rgba(255, 117, 0, 0.5); /* Полупрозрачная оранжевая рамка */
+    padding: 10px 20px; /* Внутренние отступы */
+    margin: 20px 10%; /* Отступы сверху и снизу, 10% по бокам */
+}
+
+.city-icon {
+    width: 50px; /* Ширина изображения */
+    height: auto; /* Высота автоматически пропорциональна ширине */
+    margin: 15px; /* Отступ между изображением и текстом */
+    animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg); /* Начальное состояние */
+    }
+    to {
+        transform: rotate(360deg); /* Конечное состояние */
+    }
+}
