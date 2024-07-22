@@ -55,7 +55,7 @@ venv\Scripts\activate
 ```bash
 source venv/bin/activate
 ```
-#### Установите зависимости
+#### Перейдите в папку с проектом и установите зависимости
 ```
 pip install -r requirements.txt
 ```
