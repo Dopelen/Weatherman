@@ -36,3 +36,52 @@ graph TD;
 ### Демо
 https://github.com/user-attachments/assets/88fd849b-c9ce-4bfd-ae85-1fa32db33051
 
+
+### Установка и запуск
+#### Сначала клонируйте репозиторий на ваш локальный компьютер:
+```bash
+git clone https://github.com/Dopelen/Weatherman.git
+```
+#### Установите виртуальное окружение, чтобы избежать возможного конфликта версий библиотек
+```
+python -m venv venv
+```
+#### Активируйте виртуальное окружение:
+##### На Windows:
+```bash
+venv\Scripts\activate
+```
+##### На macOS и Linux:
+```bash
+source venv/bin/activate
+```
+#### Установите зависимости
+```
+pip install -r requirements.txt
+```
+
+#### Настройка переменных окружения
+Создайте файл .env в корневом каталоге проекта и добавьте необходимые переменные окружения:
+```
+SECRET_KEY=your_secret_key
+DEBUG=True
+ALLOWED_HOSTS=localhost,127.0.0.1
+```
+
+#### Применение миграций базы данных
+```bash
+python manage.py migrate
+```
+
+#### Запустите сервер разработки
+```
+python manage.py runserver
+```
+
+#### Перейдите в браузер, проект будет доступен по адресу
+**http://127.0.0.1:8000/**
+
+##### Если у вас возникают проблемы с отсутствием статических файлов, убедитесь, что вы выполнили команду:
+```
+python manage.py collectstatic
+```
