@@ -1,35 +1,42 @@
 {% load static %}
 
 <!DOCTYPE html>
+
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
     <title>Weatherman</title>
     <link rel="stylesheet" href="{% static 'css/design.css' %}">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=BioRhyme:wdth,wght@100..125,200..800&display=swap"
           rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 </head>
+
 <body>
-
-<h1 class=page_header> Weatherman</h1>
-
-<div class="container">
-        <form method="POST" id="search-form" action="{% url 'search_city' %}">
-            {% csrf_token %}
-            <div class="input-group">
+    <header class="hero-section">
+            <h1 class=page_header> Weatherman</h1>
+    </header>
+    <div class="input-group">
+            <form method="POST" id="search-form" action="{% url 'search_city' %}">
+                {% csrf_token %}
                 <input type="text" id="city_name" name="city_name" autocomplete="off" placeholder="Enter the name of the city" list="suggestions">
                 <datalist id="suggestions"></datalist>
                 <button type="submit">Search</button>
-            </div>
-        </form>
+            </form>
+    </div>
 
     <div class="city-info">
-    <h2>{{ current_city }} {% if current_temperature %} {{ current_temperature }}&deg;C {% else %} :( {% endif %}</h2>
-        <img src="/static/images/sun.svg" alt="City Icon" class="city-icon">
+        <h2>{{ current_city }} {% if current_temperature %} {{ current_temperature }}&deg;C {% else %} :( {% endif %}</h2>
+        {% if current_temperature is not None %}
+        {% if current_temperature > 30 %}
+        <img src="/static/images/hot_dog.gif" alt="We lost the picture of the sun that should be here" class="city-icon">
+        {% else %}
+        <img src="/static/images/sun.svg" alt="We lost the picture of the sun that should be here" class="city-icon animated-icon">
+        {% endif %}
+        {% endif %}
     </div>
 
     {% if graph %}
@@ -38,33 +45,31 @@
     </div>
     {% endif %}
 
-    <main>
-        <button class="button" id="toggle-text">Show search history</button>
-        <div id="text-content">
-            <h3>Search history</h3>
-            <ul>
-                {% for city in cities %}
-                <li>{{ city.city_name }}: {{ city.search_count }}</li>
-                {% endfor %}
-            </ul>
+    <div class="button-position">
+    <button class="button" id="toggle-text">Show search history</button>
+    </div>
+
+    <div id="text-content">
+        <div class="grid-container">
+            {% for city in cities %}
+            <div class="grid-item">{{ city.city_name }}: {{ city.search_count }}</div>
+            {% endfor %}
         </div>
-    </main>
+    </div>
 
     <script>
         document.getElementById('toggle-text').addEventListener('click', function() {
-            var textDiv = document.getElementById('text-content');
+            var container = document.querySelector('.grid-container');
             var button = this;
 
-            if (textDiv.style.visibility === 'hidden' || textDiv.style.visibility === '') {
-                textDiv.style.visibility = 'visible'; // Показать текст
-                button.textContent = 'Hide search history'; // Изменить текст кнопки
+            if (!container.style.visibility || container.style.visibility === 'hidden') {
+                container.style.visibility = 'visible';
+                button.textContent = 'Hide search history';
             } else {
-                textDiv.style.visibility = 'hidden'; // Скрыть текст
-                button.textContent = 'Show search history'; // Изменить текст кнопки
+                container.style.visibility = 'hidden';
+                button.textContent = 'Show search history';
             }
         });
-
-
     </script>
 </body>
 </html>

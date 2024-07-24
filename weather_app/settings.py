@@ -1,5 +1,5 @@
-from pathlib import Path
 import os
+from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -7,16 +7,12 @@ SECRET_KEY = 'django-insecure-ad$v)j)1)hf@gx+9e@4259rzg))4ah)hp^blw89g7aq(lk_v1*
 
 # Использовать сессии для хранения CSRF токенов
 CSRF_USE_SESSIONS = True
-
-# Защитить CSRF токены через куки (включите для HTTPS)
 CSRF_COOKIE_HTTPONLY = True
-CSRF_COOKIE_SECURE = False  # Установите в True, если используете HTTPS
-
-# Доверенные источники
+CSRF_COOKIE_SECURE = False  # Включить после выпуска из производственной среды
 CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000']
 
 # Дополнительные параметры для сессий
-SESSION_COOKIE_SECURE = False  # Установите в True, если используете HTTPS
+SESSION_COOKIE_SECURE = False  # Включить после выпуска из производственной среды
 SESSION_COOKIE_HTTPONLY = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
@@ -44,7 +40,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
 ROOT_URLCONF = 'weather_app.urls'
 
 TEMPLATES = [
@@ -65,7 +60,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'weather_app.wsgi.application'
-
 
 DATABASES = {
     'default': {
@@ -88,7 +82,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'

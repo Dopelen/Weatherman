@@ -1,103 +1,156 @@
 /* static/myapp/css/styles.css */
-.container {
-    padding: 20px; /* Внутренние отступы со всех сторон */
-    margin: 0 auto; /* Автоматический внешний отступ по горизонтали для центрирования */
+:root {
+    --main_back_color: white;
+    --adit_color: rgba(213, 239, 255, 1.0);
+    --button_color: rgba(193, 227, 255, 1.0);
+    --border_color: rgba(0,95,153,255);
+    --font_color: black;
 }
 
-.page_header {
-    text-align: center; /* Центрирование текста */
-    font-family: 'BioRhyme', serif; /* Установка шрифта */
-    font-size: 48px; /* Размер шрифта */
-    color: black; /* Цвет текста */
-    margin-top: 20px; /* Отступ сверху */
-    margin-bottom: 20px; /* Отступ снизу */
-    background-color: rgb(204, 204, 0, 0.3)
-}
-
+/* Установка фона и шрифта по умолчанию также это базовый контейнер включающий все секции сайта*/
 body {
     font-family: 'BioRhyme', serif;
     line-height: 1.6;
-    background-color: rgb(255, 247, 0, 0.3);
+    background-color: var(--main_back_color);
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-.input-group {
+/* Установка шапки сайта */
+.hero-section {
+    width: 100%;
+    height: 33svh;
+    background: url('/static/images/6.jpg') no-repeat center center/cover;
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 20px; /* Внутренние отступы */
-    margin: 20px 10%; /* Отступы сверху и снизу, 10% по бокам */
 }
 
-input[type="text"] {
-    flex: 11; /* 60% ширины */
-    height: 40px; /* Высота кнопки */
-    font-size: 16px;
-    padding: 0 10px;
-    border: 1px solid #ccc;
-    outline: none;
-}
-
-button[type="submit"] {
-    flex: 1; /* 20% ширины */
-    height: 40px; /* Высота кнопки */
-    font-size: 16px;
-    cursor: pointer;
-    display: flex; /* Устанавливаем flex-контейнер */
-    align-items: center; /* Центрируем по вертикали */
-    justify-content: center; /* Центрируем по горизонтали */
-}
-
-
-/* Пример стилизации для кнопок */
-button {
+/* Главный заголовок страницы */
+.page_header {
+    text-align: center;
     font-family: 'BioRhyme', serif;
-    background-color: rgba(255, 215, 0, 0.7);
-    color: black;
-    border: 2px solid #FF4500;
+    font-size: 48px;
+    color: var(--font_color);
+}
+
+/* Характеристики группы "строка поиска + кнопка поиска".
+Для корректного отображения необходимо, чтобы и input-group и search-form оставались флекс контейнерами*/
+.input-group {
+    display: flex;
+    margin: 2% 10%;
+}
+
+#search-form {
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 0;
+}
+
+.input-group input[type="text"] {
+    flex: 11;
+    padding: 10px;
+    border: 2px solid var(--border_color);
+    border-right: none;
+    outline: none;
+    box-sizing: border-box;
+    font-size: 22px;
+}
+
+.input-group button {
+    flex: 1;
+    height: 60px;
     padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 0;
+    border: 2px solid var(--border_color);
+    box-sizing: border-box;
+    font-size: 22px;
 }
 
-button:hover {
-    background-color: #FFD700;
-    color: black;
-}
-
-#text-content {
-    visibility: hidden; /* Изначально скрыто */
-    margin-top: 20px;
-}
-
-#text-content p {
-    font-size: 18px;
-    color: black; /* Цвет текста */
-    margin: 0;
-}
-
+/* Характеристики группы информация о городе */
 .city-info {
-    display: flex; /* Использование Flexbox */
-    align-items: center; /* Вертикальное выравнивание по центру */
-    justify-content: center; /* Центрирование элементов внутри контейнера */
-    background-color: rgba(255, 215, 0, 0.5); /* Полупрозрачный желтый фон */
-    border: 2px solid rgba(255, 117, 0, 0.5); /* Полупрозрачная оранжевая рамка */
-    padding: 10px 20px; /* Внутренние отступы */
-    margin: 20px 10%; /* Отступы сверху и снизу, 10% по бокам */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--button_color);
+    border: 2px solid var(--border_color);
+    height: 120px;
+    margin: 0% 10%;
+    box-sizing: border-box;
+    font-size: 24px;
 }
 
 .city-icon {
-    width: 50px; /* Ширина изображения */
-    height: auto; /* Высота автоматически пропорциональна ширине */
-    margin: 15px; /* Отступ между изображением и текстом */
+    width: 60px;
+    height: auto;
+    margin: 15px;
+
+}
+.animated-icon {
     animation: rotate 3s linear infinite;
 }
 
+/* Характеристики отображения кнопок */
+button {
+    font-family: 'BioRhyme', serif;
+    background-color: var(--button_color);
+    color: var(--font_color);
+    border: 2px solid var(--border_color);
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.5s;
+}
+
+button:hover {
+    background-color: var(--adit_color);
+    color: var(--font_color);
+    box-shadow: 1px -1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Характеристики отображения истории */
+.button-position {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+}
+
+#toggle-text {
+    font-size: 22px;
+    width: 15%;
+}
+
+#text-content {
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-bottom: 30px;
+}
+
+.grid-container {
+    visibility: hidden;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+.grid-item {
+    background-color: var(--button_color);
+    border: 1px solid var(--border_color);
+    padding: 10px;
+}
+
+/* Анимация */
 @keyframes rotate {
     from {
-        transform: rotate(0deg); /* Начальное состояние */
+        transform: rotate(0deg);
     }
     to {
-        transform: rotate(360deg); /* Конечное состояние */
+        transform: rotate(360deg);
     }
 }
