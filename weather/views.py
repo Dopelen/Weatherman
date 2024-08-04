@@ -1,20 +1,18 @@
-from datetime import datetime, timedelta
-from typing import Optional, Dict, Any, Union
+from datetime import timedelta
+from typing import Optional, Dict, Any
 
-import matplotlib.pyplot as plt
 import openmeteo_requests
 import pandas as pd
-import plotly.express as px
 import plotly.graph_objects as go
 import plotly.io as pio
 import requests
 import requests_cache
-from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.http import HttpRequest, HttpResponse
 from django.middleware.csrf import get_token
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 from retry_requests import retry
 
-from .forms import CityForm
 from .models import CitySearch
 
 # Настройка USER_AGENT и кэш сессии необходима для корректной работы API. Она произведена здесь.
@@ -24,6 +22,7 @@ retry_session = retry(cache_session, retries=5, backoff_factor=0.2)
 openmeteo = openmeteo_requests.Client(session=retry_session)
 
 
+@csrf_exempt
 def search_city(request: HttpRequest) -> HttpResponse:
     """Функция формирует представление на основе запроса пользователя выполняя для этого: get_coordinates, get_weather_forecast, graphic_designer.
     В процессе исполнения формируется график погоды, название локации на английском языке, температурные диапазоны для отрисовки графика погоды,
@@ -206,7 +205,7 @@ def create_weather_plot(weather_data: pd.DataFrame) -> str:
     return pio.to_html(fig, full_html=False, config=config)
 
 # def city_suggestions(request):
-# """Эта функция отвечает за автодополнение поля ввода и будет внесена позднее"""
+# """Эта функция отвечает за автодополнение поля ввода"""
 #     query = request.GET.get('query', '')
 #     if query:
 #         cities = CitySearch.objects.filter(city_name__icontains(query)).order_by('-search_count')[:5]

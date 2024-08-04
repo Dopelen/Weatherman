@@ -1,9 +1,24 @@
 import os
 from pathlib import Path
+import environ
+import secrets
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-ad$v)j)1)hf@gx+9e@4259rzg))4ah)hp^blw89g7aq(lk_v1*'
+# Логика для добавления секретного ключа из переменной окружения и генерации в случае отсутствия такового
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+
+env_file = os.path.join(BASE_DIR, '.env')
+environ.Env.read_env(env_file)
+SECRET_KEY = env('SECRET_KEY', default=None)
+
+if not SECRET_KEY:
+    SECRET_KEY = secrets.token_urlsafe(50)
+    with open(env_file, 'a') as f:
+        f.write(f'\nSECRET_KEY={SECRET_KEY}\n')
+
 
 # Использовать сессии для хранения CSRF токенов
 CSRF_USE_SESSIONS = True
